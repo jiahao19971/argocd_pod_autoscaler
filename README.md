@@ -1,4 +1,4 @@
-# Pod Autoscaler
+# Argocd Pod Autoscaler
 Autoscaling pod via argocd api
 
 ## Prerequisite
@@ -132,12 +132,17 @@ argocd:
 
 
 # This section of the secret file is used by the script to access to AWS Account to configure the database instance state.
+# Not required if you dont plan to you database scaling
 aws:
 # This user have access to describe, stop and start all the RDS instance in the Account.
   aws_access_key_id: <redacted>
   aws_secret_access_key: <redacted>
 # The region would be the region that the instance is located, which is ap-southeast-1 by default
   region_name: ap-southeast-1
+ 
+# Not required if you dont plan to sent notification to slack
+slack:
+  token: <slack token here>
 ```
 
 ## File directory
