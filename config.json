@@ -1,0 +1,58 @@
+{
+    "server": {
+        "required": false,
+        "type": "list",
+        "schema": {
+            "type": "dict",
+            "schema": {
+                "name": {
+                    "required": true,
+                    "type": "string"
+                },
+                "autoscaledown": {
+                    "required": true,
+                    "type": "boolean",
+                    "check_with": "operation"
+                },
+                "operate_day": {
+                    "required": false,
+                    "type": "string",
+                    "allowed": ["weekend", "weekdays"],
+                    "dependencies": {
+                        "autoscaledown": true
+                    }
+                },
+                "database": {
+                    "required": false,
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "database": {
+        "required": false,
+        "type": "list",
+        "schema": {
+            "type": "dict",
+            "schema": {
+                "name": {
+                    "required": true,
+                    "type": "string"
+                },
+                "autoscaledown": {
+                    "required": true,
+                    "type": "boolean",
+                    "check_with": "operation"
+                },
+                "operate_day": {
+                    "required": false,
+                    "type": "string",
+                    "allowed": ["weekend", "weekdays"],
+                    "dependencies": {
+                        "autoscaledown": true
+                    }
+                }
+            }
+        }
+    }
+}

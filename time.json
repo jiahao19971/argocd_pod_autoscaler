@@ -1,0 +1,16 @@
+{
+  "hours":
+    {
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 24
+    },
+  "minutes":
+    {
+      "required": true,
+      "type": "number",
+      "min": 0,
+      "max": 60
+    }
+}

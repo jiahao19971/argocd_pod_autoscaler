@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  podscaler:
+    restart: no
+    environment:
+      URL: https://example.com/v1/api
+      STATUS: morning
+    build:
+      context: .
+    volumes:
+      - ./config.yml:/app/config.yml
+      - ./secret.yml:/app/secret.yml

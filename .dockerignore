@@ -1,0 +1,15 @@
+**/__pycache__
+config.yml
+secret.yml
+.env
+docker-login.sh
+expected.json
+test_all.py
+test_day.py
+test_db.py
+test_functional.py
+test_config.yaml
+test_secret.yaml
+**.vscode
+**.pytype
+**/guide

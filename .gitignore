@@ -1,0 +1,15 @@
+**/__pycache__
+config.yml
+secret.yml
+test_config.yml
+test_secret.yml
+docker-login.sh
+expected.json
+expected.weekend.json
+.env
+**.DS_Store
+expected.json
+expected.weekend.json
+docker-login.sh
+**.pytype
+**.vscode
