@@ -17,10 +17,7 @@
                 "operate_day": {
                     "required": false,
                     "type": "string",
-                    "allowed": ["weekend", "weekdays"],
-                    "dependencies": {
-                        "autoscaledown": true
-                    }
+                    "allowed": ["weekend", "weekdays"]
                 },
                 "database": {
                     "required": false,
@@ -47,10 +44,7 @@
                 "operate_day": {
                     "required": false,
                     "type": "string",
-                    "allowed": ["weekend", "weekdays"],
-                    "dependencies": {
-                        "autoscaledown": true
-                    }
+                    "allowed": ["weekend", "weekdays"]
                 }
             }
         }
