@@ -25,10 +25,10 @@ from .autoscaler_enum import (
   STATUS,
   SYNC,
 )
+from .empty import Empty
 from .slack_bot import SlackBot
 from .slackbot_enum import SCALINGTYPE
 from .validator import AutoscalerValidator
-from .empty import Empty
 
 logging.basicConfig(format="%(asctime)s - %(levelname)s: %(message)s")
 
@@ -46,7 +46,6 @@ class AutoScaler:
     "Environment variable %s was not found/have issue, "
     "switching back to default value: %s"
   )
-
 
   def __init__(self, config_name="config.yml", secret_name="secret.yml"):
     self.logger = logging.getLogger("pod-autoscaler")
@@ -91,7 +90,7 @@ class AutoScaler:
     self._evaluate_application_permission()
 
     self.slack.post_fail_message_to_slack(
-        SCALINGTYPE.INIT.value, "Environment:TIMEZONE", "test"
+      SCALINGTYPE.INIT.value, "Environment:TIMEZONE", "test"
     )
 
   def _get_time_scale_down(self):
@@ -881,6 +880,8 @@ class AutoScaler:
       new_config = {"server": {}}
       if "database" in self.config:
         new_config["server"] = self.config["server"] + self.config["database"]
+      else:
+        new_config["server"] = self.config["server"]
       for server in new_config["server"]:
         argo_app_name = server["name"]
         self.logger.info("Beginning database scaling for %s", argo_app_name)
@@ -957,7 +958,7 @@ class AutoScaler:
       autoscale = self._evaluate_pods_scaling()
       if autoscale:
         self.logger.info("Server pods scaling completed")
-        if self.rds != None:
+        if self.rds is not None:
           db_scale = self._scale_database_instance()
           if db_scale:
             self.logger.info("Database scaling completed")
@@ -966,7 +967,7 @@ class AutoScaler:
       else:
         raise Exception("Server pods scaling failed")
     elif self.status == STATUS.MORNING.value:
-      if self.rds != None:
+      if self.rds is not None:
         db_scale = self._scale_database_instance()
         if db_scale:
           self.logger.info("Database scaling completed")
