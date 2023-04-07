@@ -74,6 +74,8 @@ class AutoScaler:
     self.time_scale_up = self._get_time_scale_up()
     # Get the time to evaluate the scale down period (UTC only)
     self.time_scale_down = self._get_time_scale_down()
+    # Get identifier for database to check naming
+    self.db_identifier = self._get_db_identifier()
     # Get argocd api
     self.url = self._get_url_env()
     # Get what day is today (i.e. Monday, Tuesday and etc.)
@@ -154,6 +156,20 @@ class AutoScaler:
     except (IndexError, KeyError):
       default_value = "Asia/Kuala_Lumpur"
       self.logger.warning(self.env_string, "TIMEZONE", default_value)
+      return default_value
+
+  def _get_db_identifier(self):
+    default_value = "-v1"
+    try:
+      db_identifier = os.environ["DB_IDENTIFIER"]
+      self.logger.info("Environment variable DB_IDENTIFIER was found")
+      return db_identifier
+    except KeyError:
+      self.logger.warning(self.env_string, "DB_IDENTIFIER", default_value)
+      return default_value
+    except ValueError as er:
+      self.logger.warning("Environment variable DB_IDENTIFIER error: %s", er)
+      self.logger.warning(self.env_string, "DB_IDENTIFIER", default_value)
       return default_value
 
   def _get_day_env(self) -> str:
@@ -778,7 +794,9 @@ class AutoScaler:
         )
         return exact_identifier[0]
       else:
-        v1_identifier = [x for x in db_identifier if x == f"{key}-v1"]
+        v1_identifier = [
+          x for x in db_identifier if x == f"{key}{self.db_identifier}"
+        ]
         if len(v1_identifier) == 1:
           self.logger.info(
             "Database exists," " database identifier: %s", v1_identifier[0]
