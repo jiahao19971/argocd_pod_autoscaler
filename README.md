@@ -53,6 +53,9 @@ URL=ARGOCD API
 # SLACKCHANNEL="#alerts-autoscaler"
 + The redirect url that you want the slack to redirect to
 # SLACKREDIRECT="example.com"
+
++ The database identifier u wanted to add in if it is not exact
+# DB_IDENTIFIER="-test"
 ```
 
 ### Config.yml
@@ -139,7 +142,7 @@ aws:
   aws_secret_access_key: <redacted>
 # The region would be the region that the instance is located, which is ap-southeast-1 by default
   region_name: ap-southeast-1
- 
+
 # Not required if you dont plan to sent notification to slack
 slack:
   token: <slack token here>
